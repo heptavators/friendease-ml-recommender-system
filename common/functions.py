@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import numpy as np
 
@@ -17,7 +18,7 @@ def get_talents() -> pd.DataFrame:
     global talents
 
     if not "talents" in globals():
-        talents = pd.read_csv("../data/talents.csv")
+        talents = pd.read_csv(os.path.join(os.getcwd(), "data", "talents.csv"))
 
     return talents
 
@@ -93,17 +94,17 @@ def get_recommendation_with_tfrs(user: schemas.User) -> list[str]:
         list[str]: List of recommended talents using TFRS
     """
     index = builder.build_model()
+    user_tags = "|".join(user.tags)
 
     _, recommended_talents = index(
         {
             "user_id": np.array([user.id]),
             "user_gender": np.array([user.gender]),
-            "user_age": np.array([user.tags]),
+            "user_age": np.array([user.age]),
             "user_location": np.array([user.location]),
-            "user_tags": np.array([user.tags]),
+            "user_tags": np.array([user_tags]),
             "user_preferences": np.array([user.preferences]),
-        },
-        k=100,
+        }
     )
 
-    return recommended_talents
+    return np.array(recommended_talents[0], dtype=np.str_).tolist()
