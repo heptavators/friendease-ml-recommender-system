@@ -11,7 +11,7 @@ warnings.filterwarnings("ignore")
 logger = logger
 
 logger.add(
-    sys.stdout,
+    sys.stderr,
     format="{time:DD-MM-YYYY at HH:mm:ss} | {level} | {message}",
     level="DEBUG",
     colorize=True,
