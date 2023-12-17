@@ -1,5 +1,4 @@
 # Users config
-users_dir: data/users.csv
 user_columns:
     - user_id
     - user_name
@@ -10,7 +9,6 @@ user_columns:
     - user_preferences
 
 # Talent config
-talents_dir: data/talents.csv
 talent_columns:
     - talent_id
     - talent_name
@@ -21,12 +19,8 @@ talent_columns:
     - talent_description
 
 # Review config
-reviews_dir: data/reviews.csv
 review_columns:
-    - review_id
     - user_id
     - talent_id
     - rating
     - review
-
-locations_dir: data/reviews.csv

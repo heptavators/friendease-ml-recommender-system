@@ -6,7 +6,7 @@ from models import recommender, schemas
 from fastapi import APIRouter, Request, status
 
 router = APIRouter(
-    prefix="/recommendation",
+    prefix="/api/recommendation",
     tags=["Face Verification"],
 )
 
@@ -25,12 +25,11 @@ async def root():
     },
 )
 async def get_talents(payload: schemas.User) -> schemas.ListTalent:
-    logger.debug(payload)
     start = time.perf_counter()
 
     response = recommender.get_list_talents(payload)
 
     end = time.perf_counter()
-    print(f"Recommendation needs {end-start} seconds")
+    logger.debug(f"Recommendation needs {end-start} seconds")
 
     return response

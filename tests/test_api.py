@@ -39,7 +39,8 @@ class TestAPI(unittest.TestCase):
         self.assertEqual(data, {"message": "Recommendation System API"})
 
     def test_get_recommendation_success(self):
-        data = self.__post__(f"{LOCALHOST}/recommendation/talents", user)
+        data = self.__post__(f"{LOCALHOST}/api/recommendation/talents", user)
+        # logger.debug(data)
 
         self.assertEqual(data["message"], "Successfully getting recommendation")
         self.assertEqual(len(data["data"]), 200)

@@ -1,42 +1,28 @@
-import os
 import joblib
 import tensorflow as tf
 
+from common.config import config
+
 
 def build_model():
-    """
-    Returns:
-            built TFRS model
-    """
-
-    # singleton design pattern
-    global model_obj
-
-    if not "model_obj" in globals():
-        model_obj = tf.saved_model.load(
-            os.path.join(os.getcwd(), "models", "recommender_model")
-        )
-
-    return model_obj
+    if "model_obj" not in build_model.__dict__:
+        build_model.model_obj = tf.saved_model.load(config["model"]["tfrs"])
+    return build_model.model_obj
 
 
 def build_vectorizer():
-    """
-    Returns:
-            built vectorizers model
-    """
-
-    # singleton design pattern
-    global vectorizer_tags, vectorizer_text
-
-    if not "vectorizer_tags" in globals():
-        vectorizer_tags = joblib.load(
-            os.path.join(os.getcwd(), "models", "vectorizer_tags.joblib")
+    if "vectorizer_tags" not in build_vectorizer.__dict__:
+        build_vectorizer.vectorizer_tags = joblib.load(
+            config["model"]["vectorizer_tags"]
         )
 
-    if not "vectorizer_text" in globals():
-        vectorizer_text = joblib.load(
-            os.path.join(os.getcwd(), "models", "vectorizer_text.joblib")
+    if "vectorizer_text" not in build_vectorizer.__dict__:
+        build_vectorizer.vectorizer_text = joblib.load(
+            config["model"]["vectorizer_text"]
         )
 
-    return vectorizer_tags, vectorizer_text
+    return build_vectorizer.vectorizer_tags, build_vectorizer.vectorizer_text
+
+
+index = build_model()
+vectorizer_tags, vectorizer_text = build_vectorizer()

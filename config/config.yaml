@@ -1,0 +1,13 @@
+# Data path
+data:
+    talents: data/talents.csv
+    users: data/users.csv
+    tags: data/tags.csv
+    reviews: data/reviews.csv
+    location: data/location.csv
+
+# Model path
+model:
+    vectorizer_tags: models/vectorizer_tags.joblib
+    vectorizer_text: models/vectorizer_text.joblib
+    tfrs: models/recommender_model
