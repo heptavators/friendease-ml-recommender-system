@@ -3,7 +3,7 @@ import numpy as np
 from logs.logger import logger
 from models.schemas import User
 from sklearn.metrics.pairwise import linear_kernel
-from models.builder import index, vectorizer_tags, vectorizer_text
+from models.builder import tfrs, vectorizer_tags, vectorizer_text
 from common.data import talents_df, talents_tags_tfidf, talents_text_tfidf
 
 
@@ -64,7 +64,10 @@ def get_recommendation_with_tfrs(user: User) -> list[str]:
     user_tags = "|".join(user.tags)
 
     try:
-        _, recommended_talents = index(
+        logger.debug(user)
+        logger.debug(user_tags)
+        logger.debug(tfrs)
+        _, recommended_talents = tfrs(
             {
                 "user_id": np.array([user.id]),
                 "user_gender": np.array([user.gender]),

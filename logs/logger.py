@@ -10,9 +10,11 @@ warnings.filterwarnings("ignore")
 
 logger = logger
 
+logger.remove()
+
 logger.add(
     sys.stderr,
-    format="{time:DD-MM-YYYY at HH:mm:ss} | {level} | {message}",
+    format="<green>{time:DD-MM-YYYY at HH:mm:ss}</green> | <level>{level}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> | <level>{message}</level>",
     level="DEBUG",
     colorize=True,
     enqueue=True,

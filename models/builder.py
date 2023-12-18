@@ -24,5 +24,5 @@ def build_vectorizer():
     return build_vectorizer.vectorizer_tags, build_vectorizer.vectorizer_text
 
 
-index = build_model()
+tfrs = build_model()
 vectorizer_tags, vectorizer_text = build_vectorizer()
