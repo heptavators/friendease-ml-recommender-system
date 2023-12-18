@@ -39,12 +39,16 @@ def get_recommendation_with_tfidf(
         recommended_talents = [talents_df.loc[i, "talent_id"] for i in talent_indices][
             :num_recommendations
         ]
+
+        logger.debug(recommended_talents[:5])
+
+        return recommended_talents
     except Exception:
         logger.error(
             "Something is wrong when trying to get recommendation talents using Tfidf"
         )
 
-    return recommended_talents
+        return []
 
 
 def get_recommendation_with_tfrs(user: User) -> list[str]:
@@ -70,12 +74,16 @@ def get_recommendation_with_tfrs(user: User) -> list[str]:
                 "user_preferences": np.array([user.preferences]),
             }
         )
+
+        logger.debug(recommended_talents[0][:5])
+
+        return np.array(recommended_talents[0], dtype=np.str_).tolist()
     except Exception:
         logger.error(
             "Something is wrong when trying to get recommendation talents using TFRS"
         )
 
-    return np.array(recommended_talents[0], dtype=np.str_).tolist()
+        return []
 
 
 def get_recommended_talents(user: User) -> list[str]:
