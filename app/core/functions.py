@@ -1,22 +1,23 @@
 import numpy as np
 
-from logs.logger import logger
-from models.schemas import User
+from typing import List
+from app.schemas import User
+from app.core.logs import logger
 from sklearn.metrics.pairwise import linear_kernel
-from models.builder import tfrs, vectorizer_tags, vectorizer_text
-from common.data import talents_df, talents_tags_tfidf, talents_text_tfidf
+from app.builder.model import tfrs, vectorizer_tags, vectorizer_text
+from app.builder.data import talents_df, talents_tags_tfidf, talents_text_tfidf
 
 
 def get_recommendation_with_tfidf(
     user: User, num_recommendations: int = 100
-) -> list[str]:
+) -> List[str]:
     """
 
     Args:
         user (User): User data
 
     Returns:
-        list[str]: List of recommended talents using TfidfVectorizer
+        List[str]: List of recommended talents using TfidfVectorizer
     """
 
     user_tags = "|".join(user.tags)
@@ -51,21 +52,19 @@ def get_recommendation_with_tfidf(
         return []
 
 
-def get_recommendation_with_tfrs(user: User) -> list[str]:
+def get_recommendation_with_tfrs(user: User) -> List[str]:
     """
 
     Args:
         user (User): User data
 
     Returns:
-        list[str]: List of recommended talents using TFRS
+        List[str]: List of recommended talents using TFRS
     """
 
     user_tags = "|".join(user.tags)
 
     try:
-        logger.debug(user)
-        logger.debug(user_tags)
         logger.debug(tfrs)
         _, recommended_talents = tfrs(
             {
@@ -89,14 +88,14 @@ def get_recommendation_with_tfrs(user: User) -> list[str]:
         return []
 
 
-def get_recommended_talents(user: User) -> list[str]:
+def get_recommended_talents(user: User) -> List[str]:
     """
 
     Args:
         user (User): User data
 
     Returns:
-        list[str]: List of all recommended talents
+        List[str]: List of all recommended talents
     """
 
     tfidf_talents = get_recommendation_with_tfidf(user)

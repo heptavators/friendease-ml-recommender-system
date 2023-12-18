@@ -1,9 +1,10 @@
 import unittest
 
 from uuid import uuid4
-from common import functions
-from models import schemas
-from logs.logger import logger
+from app import schemas
+from app.core import functions
+from app.core.logs import logger
+from app.builder import talents_df
 
 user = schemas.User(
     id=str(uuid4()),
@@ -24,7 +25,7 @@ user = schemas.User(
 
 
 class TestRecommender(unittest.TestCase):
-    _talents = functions.get_talents()
+    _talents = talents_df
 
     def test_recommend_with_tfidf(self):
         recommended_talents = functions.get_recommendation_with_tfidf(user)

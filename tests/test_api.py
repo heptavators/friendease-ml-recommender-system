@@ -1,10 +1,11 @@
-import httpx
+from httpx import Response
 import unittest
 
 from uuid import uuid4
-from common import functions
-from models import schemas
-from logs.logger import logger
+from app.main import app
+from app.core.logs import logger
+from fastapi.testclient import TestClient
+
 
 user = {
     "id": str(uuid4()),
@@ -22,25 +23,14 @@ user = {
     ],
     "preferences": "Ingin memiliki teman yang bisa diajak kulineran dan staycation untuk mengelilingi Indonesia",
 }
-LOCALHOST = "http://127.0.0.1:8000"
+LOCALHOST = "http://localhost:5050"
 
 
 class TestAPI(unittest.TestCase):
-    def __fetch_json__(self, url: str) -> dict:
-        with httpx.Client() as client:
-            return client.get(url).json()
-
-    def __post__(self, url: str, payload: dict) -> dict:
-        with httpx.Client() as client:
-            return client.post(url, json=payload).json()
-
-    def test_app_root(self):
-        data = self.__fetch_json__(f"{LOCALHOST}")
-        self.assertEqual(data, {"message": "Recommendation System API"})
+    client = TestClient(app)
 
     def test_get_recommendation_success(self):
-        data = self.__post__(f"{LOCALHOST}/api/recommendation/talents", user)
-        # logger.debug(data)
+        data = self.client.post("/api/v1/talents", json=user).json()
 
         self.assertEqual(data["message"], "Successfully getting recommendation")
         self.assertEqual(len(data["data"]), 200)

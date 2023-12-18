@@ -3,12 +3,12 @@ import sys
 import warnings
 import tensorflow as tf
 
-from loguru import logger
+from loguru import logger as log
 
 tf.get_logger().setLevel(logging.ERROR)
 warnings.filterwarnings("ignore")
 
-logger = logger
+logger = log
 
 logger.remove()
 

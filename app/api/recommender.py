@@ -1,6 +1,5 @@
-from .schemas import User, Talent, ListTalent
-from common import functions
-from logs.logger import logger
+from app.core import functions
+from app.schemas import User, Talent, ListTalent
 
 
 def get_list_talents(user: User) -> ListTalent:
