@@ -1,4 +1,5 @@
 import numpy as np
+import tensorflow as tf
 
 from typing import List
 from app.schemas import User
@@ -41,8 +42,6 @@ def get_recommendation_with_tfidf(
             :num_recommendations
         ]
 
-        logger.debug(recommended_talents[:5])
-
         return recommended_talents
     except Exception:
         logger.error(
@@ -65,19 +64,16 @@ def get_recommendation_with_tfrs(user: User) -> List[str]:
     user_tags = "|".join(user.tags)
 
     try:
-        logger.debug(tfrs)
         _, recommended_talents = tfrs(
             {
-                "user_id": np.array([user.id]),
-                "user_gender": np.array([user.gender]),
-                "user_age": np.array([user.age]),
-                "user_location": np.array([user.location]),
-                "user_tags": np.array([user_tags]),
-                "user_preferences": np.array([user.preferences]),
+                "user_id": tf.constant([user.id], dtype=tf.string),
+                "user_gender": tf.constant([user.gender], dtype=tf.string),
+                "user_age": tf.constant([user.age], dtype=tf.int32),
+                "user_location": tf.constant([user.location], dtype=tf.string),
+                "user_tags": tf.constant([user_tags], dtype=tf.string),
+                "user_preferences": tf.constant([user.preferences], dtype=tf.string),
             }
         )
-
-        logger.debug(recommended_talents[0][:5])
 
         return np.array(recommended_talents[0], dtype=np.str_).tolist()
     except Exception:

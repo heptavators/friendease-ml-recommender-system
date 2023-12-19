@@ -1,10 +1,27 @@
 <div align="center">
+<img src="https://i.gifer.com/LRP3.gif" >  
+</div>
+
+<br>
 
 # Recommender System API
 
-</div>
+## Technology Used :
 
-### Cloning the repository
+-   Python
+-   FastAPI
+
+## Installed Packages
+
+-   tensorflow
+-   scikit-learn
+-   pandas
+-   numpy
+-   uvicorn
+-   httpx
+-   pydantic
+
+## How To Run / Install On Your Local Machine
 
 --> Clone the repository using command below :
 
@@ -18,24 +35,14 @@ git clone https://github.com/heptavators/friendease-ml-recommender-system.git
 cd friendease-ml-recommender-system
 ```
 
---> Create a virtual environment :
+--> Create a docker container :
 
 ```bash
-# Install virtualenv first
-pip install virtualenv
-
-# Then create virtual environment
-virtualenv venv
+docker build -t friendease-ml-recommender-system --no-cache -f Dockerfile .
 ```
 
---> Activate the virtual environment :
+--> Run the project :
 
 ```bash
-venv\Scripts\activate
-```
-
---> Install the requirements :
-
-```bash
-pip install -r requirements.txt
+docker run -p 5050:5050 friendease-ml-recommender-system
 ```
