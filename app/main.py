@@ -12,7 +12,7 @@ app = FastAPI(
 
 @app.get("/")
 def root():
-    image_link = "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/ac791267-5c99-4107-b027-be55ee6efbc5/width=450/01.jpeg"
+    image_link = "https://i.pinimg.com/564x/ac/86/3f/ac863ff709559d6d180e7a9287f2c3a4.jpg"
 
     return HTMLResponse(
         content=f'<div style="text-align:center"><img src="{image_link}" alt="Image"></div>',
