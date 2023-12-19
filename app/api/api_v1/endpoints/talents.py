@@ -8,6 +8,11 @@ from app.schemas import User, ListTalent
 router = APIRouter()
 
 
+@router.get("/")
+def root():
+    return {"message": "Talents endpoint"}
+
+
 @router.post(
     "/",
 )
