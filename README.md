@@ -38,11 +38,11 @@ cd friendease-ml-recommender-system
 --> Create a docker container :
 
 ```bash
-docker build -t friendease-ml-recommender-system --no-cache -f Dockerfile .
+docker build -t friendease/ml-recommender-system --no-cache -f Dockerfile .
 ```
 
 --> Run the project :
 
 ```bash
-docker run -p 5050:5050 friendease-ml-recommender-system
+docker run -p 5050:5050 friendease/ml-recommender-system
 ```

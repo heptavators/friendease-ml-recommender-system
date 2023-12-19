@@ -11,7 +11,7 @@ COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 
 # Copy the entire project into the container at /app
-COPY ./.env /app/.env
+COPY ./.env.example /app/.env
 COPY ./app /app/app
 COPY ./data /app/data
 COPY ./models /app/models

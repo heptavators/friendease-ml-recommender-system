@@ -1,0 +1,32 @@
+# name: Build and Deploy
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+# env:
+#   PROJECT_ID: testing-project-405703
+#   REGION: asia-southeast2
+#   CLOUD_BUILD_CONFIG: cloudbuild.yaml
+
+# jobs:
+#   build-and-deploy:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
+
+#       - name: Authenticate with Google Cloud
+#         uses: google-github-actions/auth@v1
+#         with:
+#           credentials_json: "${{ secrets.SERVICE_ACCOUNT_KEY }}"
+
+#       - name: Set up Cloud SDK
+#         uses: google-github-actions/setup-gcloud@v1
+
+#       - name: Trigger Cloud Build
+#         run: |
+#           gcloud builds submit --config=${{ env.CLOUD_BUILD_CONFIG }} \
+#             --substitutions=_PROJECT_ID=${{ env.PROJECT_ID }},_REGION=${{ env.REGION }},_COMMIT_SHA=${{ github.sha }}
