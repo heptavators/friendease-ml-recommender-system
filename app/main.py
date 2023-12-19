@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.api_v1.api import api_router
@@ -11,7 +12,12 @@ app = FastAPI(
 
 @app.get("/")
 def root():
-    return {"message": "Recommendation System API"}
+    image_link = "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/ac791267-5c99-4107-b027-be55ee6efbc5/width=450/01.jpeg"
+
+    return HTMLResponse(
+        content=f'<div style="text-align:center"><img src="{image_link}" alt="Image"></div>',
+        status_code=200,
+    )
 
 
 # Set all CORS enabled origins

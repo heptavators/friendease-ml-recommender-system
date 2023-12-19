@@ -8,14 +8,12 @@ from app.schemas import User, ListTalent
 router = APIRouter()
 
 
-@router.get("/")
+@router.get("")
 def root():
     return {"message": "Talents endpoint"}
 
 
-@router.post(
-    "/",
-)
+@router.post("")
 async def get_talents(payload: User) -> ListTalent:
     start = time.perf_counter()
 
